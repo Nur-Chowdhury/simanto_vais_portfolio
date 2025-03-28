@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-
 @layer base {
   body {
     @apply font-primary bg-bgLight dark:bg-bgDark text-bgDark dark:text-bgLight leading-loose;
@@ -30,6 +29,25 @@
   }
   h3 {
     @apply text-xl font-semibold;
+  }
+
+}
+
+@layer components {
+  .tiptap ul {
+    @apply list-disc pl-6 ml-4 my-5;
+  }
+
+  .tiptap ol {
+    @apply list-decimal pl-6 ml-4 my-5;
+  }
+
+  .tiptap li p {
+    @apply mt-1 mb-1;
+  }
+
+  .tiptap blockquote {
+    @apply my-2 px-2 py-1 bg-gray-200 font-medium rounded-lg;
   }
 
 }

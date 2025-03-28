@@ -1,8 +1,10 @@
 'use client';
 
 import { EditorContent, useEditor } from "@tiptap/react";
-import { extensions } from "./tiptapExtensions";
-import Menubar from "./Menubar";
+import "highlight.js/styles/atom-one-dark.css";
+import MenuBar from "./MenuBar";
+import React from "react";
+import { extensions } from "./TipTapExtensions";
 
 const Editor = ({ onDataChange, content, editable }) => {
   const editor = useEditor({
@@ -11,7 +13,7 @@ const Editor = ({ onDataChange, content, editable }) => {
     editorProps: {
       attributes: {
         class:
-          "mt-7 border border-slate-300 rounded-xl p-5 bg-white text-black",
+          " tiptap mt-7 border border-slate-300 rounded-xl p-5 bg-white text-black",
       },
     },
     onUpdate: ({ editor }) => {
@@ -19,11 +21,11 @@ const Editor = ({ onDataChange, content, editable }) => {
       onDataChange(json);
     },
     content: content,
-  })
+  });
 
   return (
     <div className="w-full relative">
-      {editable && <Menubar editor={editor} />}
+      {editable && <MenuBar editor={editor} />}
       <EditorContent editor={editor} />
     </div>
   );
