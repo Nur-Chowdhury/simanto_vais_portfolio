@@ -1,9 +1,14 @@
 import localFont from "next/font/local";
 import {JetBrains_Mono, JetBrains_Mono} from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
 import PageTransition from "@/components/pagetransition";
 import StairTransition from "@/components/StairTransition";
+import { ToastContainer } from "react-toastify";
+import { Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./Provider";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const jetBrainsMono = JetBrains_Mono({ 
   subsets: ["latin"],
@@ -33,9 +38,23 @@ export default function RootLayout({ children }) {
       <body
         className={`${jetBrainsMono.variable} ${jetBrainsMono.variable} antialiased`}
       >
-        <Header />
-        <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        <AuthProvider>
+          <StairTransition />
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={true}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Bounce}
+          />
+          <PageTransition>{children}</PageTransition>
+        </AuthProvider>
       </body>
     </html>
   );

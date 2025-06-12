@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Education from "@/components/Education";
+import Header from "@/components/Header";
 export default function About() {
 
   const [type, setType] = useState(1);
 
   return (
     <section className="h-full">
+      <Header />
       <div className="container mx-auto h-full py-4">
         {/* header */}
         <div className="flex justify-center items-center">

@@ -8,49 +8,17 @@
     @apply font-primary bg-bgLight dark:bg-bgDark text-bgDark dark:text-bgLight leading-loose;
     transition: background-color 0.4s ease-in-out, color 0.3s ease-in-out;
   }
-  .h1 {
-    @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
-  }
-  .h2 {
-    @apply text-[38px] xl:text-[48px] leading-[1.1] font-semibold;
-  }
-  .h3 {
-    @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
-  }
-  .transition-colors-400 {
-    transition: color 0.3s ease-in-out, background-color 0.4s ease-in-out;
-  }
-
-  h1 {
-    @apply text-3xl  font-extrabold;
-  }
-  h2 {
-    @apply text-2xl font-bold;
-  }
-  h3 {
-    @apply text-xl font-semibold;
-  }
-
-}
-
-@layer components {
-  .tiptap ul {
-    @apply list-disc pl-6 ml-4 my-5;
-  }
-
-  .tiptap ol {
-    @apply list-decimal pl-6 ml-4 my-5;
-  }
-
-  .tiptap li p {
-    @apply mt-1 mb-1;
-  }
-
-  .tiptap blockquote {
-    @apply my-2 px-2 py-1 bg-gray-200 font-medium rounded-lg;
-  }
-
 }
 
 
+.slick-dots li button:before {
+  color: #10b981 !important; /* Tailwind green-500 */
+  font-size: 12px !important;
+}
 
+/* Arrow color */
+.slick-prev:before,
+.slick-next:before {
+  color: #10b981 !important; /* Tailwind green-500 */
+  font-size: 24px !important; /* Optional: adjust arrow size */
+}
