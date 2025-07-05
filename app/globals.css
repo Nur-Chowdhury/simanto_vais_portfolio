@@ -6,7 +6,7 @@
 @layer base {
   body {
     @apply font-primary bg-bgLight dark:bg-bgDark text-bgDark dark:text-bgLight leading-loose;
-    transition: background-color 0.4s ease-in-out, color 0.3s ease-in-out;
+    transition: background-color 0.4s ease-in-out, color 0.3s ease-in-out; 
   }
 }
 

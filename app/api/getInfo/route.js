@@ -4,7 +4,6 @@ import Info from "@/models/Info";
 export async function GET()  {
   try {
     await connectToDatabase();
-
     const info = await Info.findOne();
 
     if (!info) {

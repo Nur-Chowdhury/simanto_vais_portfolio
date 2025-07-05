@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const jetBrainsMono = JetBrains_Mono({ 
-  subsets: ["latin"],
+  subsets: ["latin"], 
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jetbrainsMono"
 });

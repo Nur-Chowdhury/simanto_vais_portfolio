@@ -20,7 +20,7 @@ export default function Header() {
                 <div className=' hidden xl:flex items-center gap-8'>
                     <Nav />
                     <ThemeToggle />
-                </div> 
+                </div>  
 
                 {/* mobile nav */}
                 <div className='flex gap-4 xl:hidden'>
