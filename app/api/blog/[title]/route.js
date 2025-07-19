@@ -75,9 +75,7 @@ export async function PUT(req, context) {
 
         const updatedBlog = await Blog.findOneAndUpdate({ title: decodedTitle }, upblog, { new: true });
         return NextResponse.json(updatedBlog, { status: 200 });
-    } catch (err) {
-      console.log(err);
-      
+    } catch (err) {      
       return NextResponse.json({ error: "Failed to update blog!" }, { status: 500 });
     }
 }
@@ -100,9 +98,7 @@ export async function DELETE(req, context) {
     }
 
     return NextResponse.json({ message: "Blog deleted successfully!" }, { status: 200 });
-  } catch (err) {
-    console.log(err);
-    
+  } catch (err) {    
     return NextResponse.json({ error: "Failed to delete blog." }, { status: 500 });
   }
 }

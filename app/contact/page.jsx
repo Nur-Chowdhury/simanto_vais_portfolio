@@ -22,7 +22,6 @@ export default function contact() {
         setLinks(data.links || [{ name: '', url: '', logo: '' }]);
         setLoading(false);
       } catch (error) {
-        console.log("Failed to fetch contact data:", error);
         setLoading(false);
         toast.error("Failed to fetch contact data");
       }

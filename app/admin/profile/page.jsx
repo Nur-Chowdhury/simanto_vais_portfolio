@@ -29,8 +29,6 @@ export default function page() {
 
         fetchUserInfo();
     }, []);
-
-    console.log('userInfo', userInfo);
     
 
     return (

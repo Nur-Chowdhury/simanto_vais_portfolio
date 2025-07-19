@@ -205,7 +205,6 @@ export default function Editor({ address, method, LOCAL_STORAGE_KEY, editingData
                 toast.error("Error: " + err.error);
             }
         } catch (err) {
-            console.log("Submission Error:", err);
             toast.error("Something went wrong.");
         }
     };

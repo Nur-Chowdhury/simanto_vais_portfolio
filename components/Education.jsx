@@ -28,7 +28,7 @@ export default function Education() {
                 const data = await res.json();
                 setEducations(data);
             } catch (err) {
-                console.log(err);
+                toast.error(err);
             } finally {
                 setLoading(false);
             }

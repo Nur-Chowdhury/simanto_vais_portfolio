@@ -19,10 +19,8 @@ export async function POST(req) {
 
         await connectToDatabase();
         const body = await req.json();
-        console.log("Received publication data:", body);
         const newPub = new Publication(body);
         await newPub.save();
-        console.log("Publication saved successfully:", newPub);
         return NextResponse.json({ message: "Created", publication: newPub }, { status: 201 });
     } catch (err) {
         return NextResponse.json({ error: "Failed to add publication" }, { status: 500 });

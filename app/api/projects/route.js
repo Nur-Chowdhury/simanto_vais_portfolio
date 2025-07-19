@@ -39,7 +39,6 @@ export async function POST(req) {
     await newProject.save();
     return NextResponse.json({ message: "Project saved"}, { status: 201 });
   } catch (err) {
-    console.log(err);
     return Response.json({ error: "Failed to create Project." }, { status: 500 });
   }
 }
@@ -63,7 +62,6 @@ export async function GET(req) {
 
         return Response.json({ projects, totalPages });
     } catch (error) {
-        console.log(error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

@@ -45,7 +45,6 @@ export default function Comments({ title }) {
             setReplyTo(null);
             toast.success("Your comment is Saved!");
         } catch (error) {
-            console.log(error);
             toast.error("Something went wrong! Please, try again.");
         }
     };

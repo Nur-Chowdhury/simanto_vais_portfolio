@@ -26,7 +26,6 @@ export default function Intro({userInfo}) {
             setAbout(data.about);
             setIsEditing(false);
         } catch (error) {
-            console.log('Error updating intro:', error);
             toast.error('Error updating intro:', error);
         }
     }

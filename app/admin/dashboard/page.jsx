@@ -10,7 +10,6 @@ import Link from 'next/link';
 export default function page() {
 
     const { data: session } = useSession();
-    console.log("Session:", session);
     
     return (
         <div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Education from "@/components/Education";
 import Header from "@/components/Header";
+import { toast } from "react-toastify";
 export default function About() {
 
   const [type, setType] = useState(1);
@@ -14,15 +15,13 @@ export default function About() {
     try {
         setLoading(true);
         const res = await fetch(`/api/getInfo`);
-        console.log("Response:", res);
         const data = await res.json();
-        console.log("Data:", data);
         setInfo(data);
         if (!res.ok) {
-            toast.error('Failed to fetch blogs');
+            toast.error('Failed to fetch info.');
         }
     } catch (error) {
-        toast.error('Failed to fetch blogs');
+        toast.error('Failed to fetch info.');
     }
     setLoading(false);
   };

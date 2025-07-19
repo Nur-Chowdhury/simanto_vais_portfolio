@@ -37,7 +37,7 @@ export default function Blogs() {
     return (
       <div className='w-full'>
         <Header />
-        <div className=" w-[90%] p-4 mx-auto flex flex-col items-center justify-center gap-8">
+        <div className=" w-[90%] p-4 mx-auto flex flex-col items-center justify-center gap-[10px]">
             <input
               type="text"
               placeholder="Search blogs..."
@@ -54,7 +54,7 @@ export default function Blogs() {
   return (
     <div className='w-full'>
       <Header />
-      <div className=" w-[90%] p-4 mx-auto flex flex-col items-center justify-center gap-8">
+      <div className=" w-[90%] p-4 mx-auto flex flex-col items-center justify-center gap-4">
         <input
           type="text"
           placeholder="Search blogs..."
@@ -69,31 +69,31 @@ export default function Blogs() {
           <div className=' w-full flex flex-wrap gap-4 justify-center'>
             {blogs?.map((blog) => (
               <Link key={blog._id} href={`/blog/${blog.title}`}>
-                <div className=" w-[300px] h-[450px] mb-6 p-2 border rounded shadow hover:shadow-lg transition-all cursor-pointer duration-300
+                <div className=" w-[300px] h-[400px] mb-6 p-2 border rounded shadow hover:shadow-lg transition-all cursor-pointer duration-300
                 flex flex-col items-center hover:scale-105 dark:shadow-gray-500">
                   <img
                     src={blog.coverImage ? blog.coverImage : "/assets/no_img.jpg"}
                     alt={blog.title}
-                    className="w-full h-[220px] object-cover mb-2 rounded"
+                    className="w-full h-[180px] object-cover mb-2 rounded"
                   />
                   {blog.categories && blog.categories.length > 0 && (
-                    <div className="mb-2 flex flex-wrap gap-2">
+                    <div className="mb-1 flex flex-wrap gap-2">
                       {blog.categories.map((category, index) => (
-                        <span key={index} className="text-sm bg-green-500 text-white px-2 py-1 rounded-xl">
+                        <span key={index} className="text-sm bg-green-500 text-white px-[2px] py-[1px] rounded-md">
                           {category}
                         </span>
                       ))}
                     </div>
                   )}
-                  <h2 className="text-xl font-bold">{blog.title}</h2>
-                  <p className="">{blog.preview ? blog.preview : "No Preview..."}</p>
+                  <h2 className="text-lg font-semibold">{blog.title}</h2>
+                  <p className=" text-base">{blog.preview ? blog.preview : "No Preview..."}</p>
                 </div>
               </Link>
             ))}
           </div>
         )}
 
-        <div className=" w-full max-w-[700px] flex justify-between items-center mt-6">
+        <div className=" w-full max-w-[700px] flex justify-between items-center">
           <button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}

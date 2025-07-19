@@ -4,7 +4,6 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 
 // Ensure the POST method is handled
 export async function POST(req) {
-    console.log("POST");
     
   try {
     const { image } = await req.json(); // Expect base64 image from the client
