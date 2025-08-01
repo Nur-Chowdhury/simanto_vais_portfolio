@@ -1,19 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import { storage } from "@/lib/firebase";
 import dynamic from "next/dynamic";
 const CreatableSelect = dynamic(() => import("react-select/creatable"), {
   ssr: false,
 });
 import makeAnimated from "react-select/animated";
 import { toast } from "react-toastify";
+import { supabase } from "@/lib/supabase";
 
 const types = ["Paragraph", "Image", "Collage", "Code Snippet"];
 
@@ -105,35 +99,57 @@ export default function Editor({ address, method, LOCAL_STORAGE_KEY, editingData
         if (!imageFile) return;
 
         setImageFileUploading(true);
-        const fileName = new Date().getTime() + imageFile.name;
-        const storageRef = ref(storage, fileName);
-        const uploadTask = uploadBytesResumable(storageRef, imageFile);
+        setImageFileUploadProgress(0);
 
-        uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-                const progress =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                setImageFileUploadProgress(progress.toFixed(0));
-            },
-            (error) => {
-                console.error("Upload Error:", error);
-                setImageFileUploading(false);
-            },
-            async () => {
-                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                type === "Image"
-                ? setContent(downloadURL)
-                : type === "header"
-                ? setContent((prevContent) => ({
-                    ...prevContent,
-                    coverImage: downloadURL,
-                    }))
-                : setContent((prev) => [...prev, downloadURL]);
-                setImageFileUploading(false);
-                setImageFile(null);
+        const fileName = `${Date.now()}_${imageFile.name}`;
+        const bucket = "images";
+        const path = `public/${fileName}`;
+        const url = `${supabase.supabaseUrl}/storage/v1/object/${bucket}/${path}`;
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.upload.onprogress = (e) => {
+            if (e.lengthComputable) {
+                const percent = ((e.loaded / e.total) * 100).toFixed(0);
+                setImageFileUploadProgress(percent);
             }
-        );
+        };
+
+        xhr.onload = async () => {
+            if (xhr.status === 200 || xhr.status === 204) {
+                const { data } = supabase.storage
+                    .from(bucket)
+                    .getPublicUrl(path);
+
+                const publicUrl = data?.publicUrl;
+                if (type === "Image") {
+                    setContent(publicUrl);
+                } else if (type === "header") {
+                    setContent((prevContent) => ({
+                    ...prevContent,
+                    coverImage: publicUrl,
+                    }));
+                } else {
+                    setContent((prev) => [...prev, publicUrl]);
+                }
+            }else {
+                toast.error(`Upload failed!`);
+                console.log("Upload Error: ", xhr.responseText);
+            }
+            setImageFileUploading(false);
+            setImageFile(null);
+        }
+
+        xhr.onerror = () => {
+            toast.error("Upload error occurred.");
+            console.log("Upload Error:", xhr.responseText);
+            setImageFileUploading(false);
+        };
+
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Authorization", `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`);
+
+        xhr.send(imageFile);
     };
 
     const removeCollageImage = (url) => {
